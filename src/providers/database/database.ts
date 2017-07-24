@@ -53,7 +53,7 @@ export class Database {
 
   addToDatabase(movieObj): Promise<any> {
     return new Promise((resolve) => {
-      let addRef = firebase.database().ref('films');
+      let addRef = firebase.database().ref('films').child(id);
       addRef.push(movieObj);
       resolve(true);
     });
