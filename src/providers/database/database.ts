@@ -43,7 +43,7 @@ export class Database {
 
   deleteMovie(id): Promise<any> {
     return new Promise((resolve) => {
-      let ref = firebase.database().ref('films');
+      let ref = firebase.database().ref('films').child(id);
       ref.remove();
       resolve(true);
     });
@@ -53,7 +53,7 @@ export class Database {
 
   addToDatabase(movieObj): Promise<any> {
     return new Promise((resolve) => {
-      let addRef = firebase.database().ref('films').child(id);
+      let addRef = firebase.database().ref('films');
       addRef.push(movieObj);
       resolve(true);
     });
