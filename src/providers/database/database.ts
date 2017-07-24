@@ -43,7 +43,7 @@ export class Database {
 
   deleteMovie(id): Promise<any> {
     return new Promise((resolve) => {
-      let ref = firebase.database().ref('films').child(id);
+      let ref = firebase.database().ref('films/').child(id);
       ref.remove();
       resolve(true);
     });

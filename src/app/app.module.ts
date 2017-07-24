@@ -13,6 +13,8 @@ import { Database } from '../providers/database/database';
 import { Image } from '../providers/image/image';
 import { Preloader } from '../providers/preloader/preloader';
 import { Camera } from "@ionic-native/camera";
+import { TabsPage } from "../pages/tabs/tabs";
+import { UserPage } from "../pages/user/user";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBj5LCPKCO4DBs85MOzbkpUfmpf7l-YQjQ",
@@ -27,6 +29,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    TabsPage,
+    UserPage,
     HomePage
   ],
   imports: [
@@ -38,6 +42,8 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TabsPage,
+    UserPage,
     HomePage
   ],
   providers: [
