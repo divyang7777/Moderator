@@ -1,0 +1,45 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>
+         Moderators Feeds :- 
+      </ion-title>
+      
+   </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+   <ion-list>
+      <ion-card
+         class="movie"
+         text-wrap
+         *ngFor="let movie of movies | async">
+         <ion-item>
+            <div *ngIf="movie.image">
+               <img [src]="movie.image">
+            </div>
+            
+            <p>{{ movie.summary }}</p>
+
+         </ion-item>
+
+
+         <div class="manage-record" padding>
+           <button
+              ion-button
+              text-center
+              color="primary"
+              (click)="editMovie(movie)">Accept</button>
+
+           <button
+              ion-button
+              text-center
+              color="danger"
+              (click)="deleteMovie(movie.image)">Decline</button>
+       </div>
+
+      </ion-card>
+   </ion-list>
+
+
+</ion-content>

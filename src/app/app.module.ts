@@ -14,7 +14,8 @@ import { Image } from '../providers/image/image';
 import { Preloader } from '../providers/preloader/preloader';
 import { Camera } from "@ionic-native/camera";
 import { TabsPage } from "../pages/tabs/tabs";
-import { UserPage } from "../pages/user/user";
+import { Modals } from "../pages/modals/modals";
+import { DetailsPage } from "../pages/details/details";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBj5LCPKCO4DBs85MOzbkpUfmpf7l-YQjQ",
@@ -30,7 +31,7 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     TabsPage,
-    UserPage,
+    DetailsPage,
     HomePage
   ],
   imports: [
@@ -43,7 +44,7 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     TabsPage,
-    UserPage,
+    DetailsPage,
     HomePage
   ],
   providers: [

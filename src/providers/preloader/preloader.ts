@@ -5,9 +5,12 @@ import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Preloader provider.
+    displayPreloader: any;
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
+  for mor    displayPreloader: any;
+e info on providers and    [x: string]: any;
+ Angular DI.
 */
 @Injectable()
 export class Preloader {
@@ -21,14 +24,14 @@ export class Preloader {
 
 
 
-  //  displayPreloader() : void
-  //  {
-  //     this.loading = this.loadingCtrl.create({
-  //        content: 'Please wait...'
-  //     });
+   displayPreloader() : void
+   {
+      this.loading = this.loadingCtrl.create({
+         content: 'Please wait...'
+      });
 
-  //     this.loading.present();
-  //  }
+      this.loading.present();
+   }
 
 
 
