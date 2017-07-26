@@ -26,27 +26,7 @@
                <img [src]="movie.image">
             </div>
             <h2>{{ movie.title }}</h2>
-            <small>{{ movie.date }} ({{ movie.duration }})</small>
             <p>{{ movie.summary }}</p>
-
-            <section class="multiples">
-               <h3>Actors/Actresses</h3>
-             <ion-chip
-                *ngFor="let actor of movie.actors"
-                padding-left
-                padding-right
-                margin-right>{{ actor.name }}</ion-chip>
-            </section>
-
-
-            <section class="multiples">
-               <h3>Genres</h3>
-               <ion-chip
-                  *ngFor="let genre of movie.genres"
-                  padding-left
-                  padding-right
-                  margin-right>{{ genre.name }}</ion-chip>
-            </section>
 
          </ion-item>
       </ion-card>

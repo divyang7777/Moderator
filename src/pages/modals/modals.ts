@@ -18,12 +18,12 @@ export class Modals {
     public movies: any;
     public movieName: any = '';
     public movieImage: any = '';
-    public movieGenres: any = [];
-    public movieDuration: any = '';
+    // public movieGenres: any = [];
+    // public movieDuration: any = '';
     public movieSummary: any = '';
-    public movieActors: any = [];
-    public movieYear: any = '';
-    public movieRating: any = '';
+    // public movieActors: any = [];
+    // public movieYear: any = '';
+    // public movieRating: any = '';
     public movieId: string = '';
     public isEditable: boolean = false;
 
@@ -39,13 +39,13 @@ export class Modals {
     ) {
         this.form = _FB.group({
             'summary': ['', Validators.minLength(10)],
-            'year': ['', Validators.maxLength(4)],
+            // 'year': ['', Validators.maxLength(4)],
             'name': ['', Validators.required],
-            'duration': ['', Validators.required],
+            // 'duration': ['', Validators.required],
             'image': ['', Validators.required],
-            'rating': ['', Validators.required],
-            'genres': ['', Validators.required],
-            'actors': ['', Validators.required]
+            // 'rating': ['', Validators.required],
+            // 'genres': ['', Validators.required],
+            // 'actors': ['', Validators.required]
         });
 
         this.movies = firebase.database().ref('moderator/');
@@ -56,23 +56,23 @@ export class Modals {
                 k;
 
             this.movieName = movie.title;
-            this.movieDuration = movie.duration;
+            // this.movieDuration = movie.duration;
             this.movieSummary = movie.summary;
-            this.movieRating = movie.rating;
-            this.movieYear = movie.year;
+            // this.movieRating = movie.rating;
+            // this.movieYear = movie.year;
             this.movieImage = movie.image;
             this.filmImage = movie.image;
             this.movieId = movie.id;
 
 
-            for (k in movie.genres) {
-                this.movieGenres.push(movie.genres[k].name);
-            }
+            // for (k in movie.genres) {
+            //     this.movieGenres.push(movie.genres[k].name);
+            // }
 
 
-            for (k in movie.actors) {
-                this.movieActors.push(movie.actors[k].name);
-            }
+            // for (k in movie.actors) {
+            //     this.movieActors.push(movie.actors[k].name);
+            // }
 
             this.isEditable = true;
         }
@@ -82,31 +82,31 @@ export class Modals {
 
 
     saveMovie(val) {
-        let title: string = this.form.controls["name"].value,
-            summary: string = this.form.controls["summary"].value,
-            rating: number = this.form.controls["rating"].value,
-            genres: any = this.form.controls["genres"].value,
-            actors: any = this.form.controls["actors"].value,
-            duration: string = this.form.controls["duration"].value,
-            year: string = this.form.controls["year"].value,
-            image: string = this.filmImage,
-            types: any = [],
-            people: any = [],
-            k: any;
+        let summary: string = this.form.controls["summary"].value,
+            title: string = this.form.controls["name"].value,
+            // rating: number = this.form.controls["rating"].value,
+            // genres: any = this.form.controls["genres"].value,
+            // actors: any = this.form.controls["actors"].value,
+            // duration: string = this.form.controls["duration"].value,
+            // year: string = this.form.controls["year"].value,
+            image: string = this.filmImage
+            // types: any = [],
+            // people: any = [],
+            // k: any;
 
 
-        for (k in genres) {
-            types.push({
-                "name": genres[k]
-            });
-        }
+        // for (k in genres) {
+        //     types.push({
+        //         "name": genres[k]
+        //     });
+        // }
 
 
-        for (k in actors) {
-            people.push({
-                "name": actors[k]
-            });
-        }
+        // for (k in actors) {
+        //     people.push({
+        //         "name": actors[k]
+        //     });
+        // }
 
 
         if (this.isEditable) {
@@ -120,12 +120,12 @@ export class Modals {
                             {
                                 title: title,
                                 summary: summary,
-                                rating: rating,
-                                duration: duration,
+                                // rating: rating,
+                                // duration: duration,
                                 image: uploadedImage,
-                                genres: types,
-                                actors: people,
-                                year: year
+                                // genres: types,
+                                // actors: people,
+                                // year: year
                             })
                             .then((data) => {
                                 this._LOADER.hidePreloader();
@@ -139,11 +139,11 @@ export class Modals {
                     {
                         title: title,
                         summary: summary,
-                        rating: rating,
-                        duration: duration,
-                        genres: types,
-                        actors: people,
-                        year: year
+                        // rating: rating,
+                        // duration: duration,
+                        // genres: types,
+                        // actors: people,
+                        // year: year
                     })
                     .then((data) => {
                         this._LOADER.hidePreloader();
@@ -160,11 +160,11 @@ export class Modals {
                         title: title,
                         image: uploadedImage,
                         summary: summary,
-                        rating: rating,
-                        duration: duration,
-                        genres: types,
-                        actors: people,
-                        year: year
+                        // rating: rating,
+                        // duration: duration,
+                        // genres: types,
+                        // actors: people,
+                        // year: year
                     })
                         .then((data) => {
                             this._LOADER.hidePreloader();
