@@ -18,16 +18,16 @@ export class Database {
   renderFeeds(): Observable<any> {
     try {
       return new Observable(observer => {
-        let feed: any = [];
+        let Rfeed: any = [];
         firebase.database().ref('publicFeeds').orderByKey().once('value', (items: any) => {
-          observer.next(feed);
+          observer.next(Rfeed);
           observer.complete();
 
           items.forEach((item) => {
-            feed.push(item.val());
+            Rfeed.push(item.val());
           });
 
-          observer.next(feed.item);
+          observer.next(Rfeed.item);
           observer.complete();
         },
           (error) => {
@@ -47,16 +47,16 @@ export class Database {
   renderStory(): Observable<any> {
     try {
       return new Observable(observer => {
-        let feed: any = [];
+        let Msfeed: any = [];
         firebase.database().ref('Moderator_Story').orderByKey().once('value', (items: any) => {
-          observer.next(feed);
+          observer.next(Msfeed);
           observer.complete();
 
           items.forEach((item) => {
-            feed.push(item.val());
+            Msfeed.push(item.val());
           });
 
-          observer.next(feed.item);
+          observer.next(Msfeed.item);
           observer.complete();
         },
           (error) => {
@@ -77,16 +77,16 @@ export class Database {
   renderModerator(): Observable<any> {
     try {
       return new Observable(observer => {
-        let feed: any = [];
-        firebase.database().ref('moderator').orderByKey().once('value', (items: any) => {
-          observer.next(feed);
+        let Mfeed: any = [];
+        firebase.database().ref('moderator/').orderByKey().once('value', (items: any) => {
+          observer.next(Mfeed);
           observer.complete();
 
           items.forEach((item) => {
-            feed.push(item.val());
+            Mfeed.push(item.val());
           });
 
-          observer.next(feed.item);
+          observer.next(Mfeed.item);
           observer.complete();
         },
           (error) => {
@@ -121,11 +121,13 @@ export class Database {
 
 
 
-  deleteMovie(id: any): Promise<any> {
+  deleteMovie(feed: any): Promise<any> {
     return new Promise((resolve) => {
-      var ref = firebase.database().ref('moderator');
-      ref.orderByChild('feed').equalTo(id).on('child_added', (snapshot) => {
-        snapshot.ref.remove()
+      let ref = firebase.database().ref('moderator');
+      ref.orderByChild('feed').equalTo(feed.feed).once('child_added', (snapshot) => {
+        // console.log(snapshot.val());
+        snapshot.ref.remove();
+        // location.reload();
       });
       // console.log(id);
       // var ref = firebase.database().ref('moderator');

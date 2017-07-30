@@ -60,9 +60,9 @@ export class Modals {
 
    savestory(val)
    {
-       let summary 	: string 		= this.form.controls["summary"].value,
-           title	    : string		= this.form.controls["name"].value,
-  		     image     : string        = this.storyImage
+       let  summary 	: string 	= this.form.controls["summary"].value,
+            title	    : string	= this.form.controls["name"].value,
+  		    image       : string    = this.storyImage
   		
 
 
@@ -78,8 +78,8 @@ export class Modals {
 
                this._DB.updateDatabase(this.storyId,
                {
-                  summary  : summary,
-                  title    : title,
+                    summary  : summary,
+                    title    : title,
 	                image    : uploadedImage
 	            })
             });
@@ -89,7 +89,7 @@ export class Modals {
 
            this._DB.updateDatabase(this.storyId,
            {
-              title    : title,
+                title    : title,
 	            summary  : summary
 	       })
 	     }
@@ -103,9 +103,9 @@ export class Modals {
             let uploadedImage : any = snapshot.downloadURL;
 
             this._DB.addToDatabase({
-	           image    : uploadedImage,
-             title    : title,
-             summary  : summary
+	            image    : uploadedImage,
+                title    : title,
+                summary  : summary
 	        })
          });
 

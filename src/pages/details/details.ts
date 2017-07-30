@@ -21,7 +21,7 @@ import 'rxjs/Rx';
 })
 export class DetailsPage {
 
-  public userFeed: any;
+  public userFeeds: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,7 +39,8 @@ export class DetailsPage {
   }
 
   renderModerator() {
-    this.userFeed = this._DB.renderModerator();
+    this.userFeeds = this._DB.renderModerator();
+    console.log(this.userFeeds);
     // this._LOADER.hidePreloader();
   }
 
@@ -48,14 +49,14 @@ export class DetailsPage {
   //   this.http.get(url).toPromise().then(res => console.log(res));
   // }
 
-  ApproveFeeds(userFeeds) {
+  ApproveFeeds(userFeed) {
+    console.log(userFeed);
     return new Promise((resolve) => {
-      let addRef = firebase.database().ref('publicFeeds/');
-      addRef.push(userFeeds)
+      let addRef = firebase.database().ref('publicFeeds').push(userFeed)
         .then((data) => {
-          this._DB.deleteMovie(userFeeds);
+          this._DB.deleteMovie(userFeed);
+          // location.reload();
         });
-
       resolve(true);
     });
   }

@@ -13,13 +13,13 @@
       <ion-card
          class="userFeeds"
          text-wrap
-         *ngFor="let userFeeds of userFeed | async">
+         *ngFor="let userFeed of userFeeds | async">
          <ion-item>
-            <div *ngIf="userFeeds.feed">
-               <img [src]="userFeeds.feed">
+            <div *ngIf="userFeed.feed">
+               <img [src]="userFeed.feed">
             </div>
             
-            <p>{{ userFeeds.summary }}</p>
+            <p>{{ userFeed.summary }}</p>
 
          </ion-item>
 
@@ -43,7 +43,7 @@
               ion-button
               text-center
               color="danger"
-              (click)="DeleteFeeds(userFeeds.feed)">Decline</button>
+              (click)="DeleteFeeds(userFeed.feed)">Decline</button>
        </div>
 
       </ion-card>
