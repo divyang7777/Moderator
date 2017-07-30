@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 import { Modals } from '../../pages/modals/modals';
 import { Database } from "../../providers/database/database";
@@ -19,16 +20,15 @@ import 'rxjs/Rx';
   templateUrl: 'details.html',
 })
 export class DetailsPage {
-  
-  public loadAndParseMovies: any;
-  public movies: any;
 
+  public userFeed: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private modalCtrl: ModalController,
     private _DB: Database,
-    private platform: Platform ) {
+    private platform: Platform,
+    public http: Http) {
   }
 
   ionViewDidLoad() {
@@ -39,28 +39,39 @@ export class DetailsPage {
   }
 
   renderModerator() {
-    this.movies = this._DB.renderModerator();
+    this.userFeed = this._DB.renderModerator();
     // this._LOADER.hidePreloader();
   }
 
-  editMovie(movie) {
-    return new Promise((resolve) => {
-      let addRef = firebase.database().ref('films/');
-      addRef.push(movie);
-      this._DB.deleteMovie(movie);
-      resolve(true);
+  // getAddress(){
+  //   let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + 22.368060 + "," + 70.799651+"&key=AIzaSyAL0nTtl5z-ZjeN-FPDlQWD17VR7poo6U8"; 
+  //   this.http.get(url).toPromise().then(res => console.log(res));
+  // }
 
+  ApproveFeeds(userFeeds) {
+    return new Promise((resolve) => {
+      let addRef = firebase.database().ref('publicFeeds/');
+      addRef.push(userFeeds)
+        .then((data) => {
+          this._DB.deleteMovie(userFeeds);
+        });
+
+      resolve(true);
     });
   }
 
-  deleteMovie(_movie) {
-    // this._LOADER.displayPreloader();
-    console.log(_movie);
-    this._DB.deleteMovie(_movie)
+
+
+
+  DeleteFeeds(userFeeds) {
+    console.log(userFeeds);
+    this._DB.deleteMovie(userFeeds)
       .then((data) => {
-        // this.loadAndParseMovies();
+        location.reload();
       });
   }
+
+
 
 
 }

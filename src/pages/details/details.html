@@ -1,7 +1,7 @@
 <ion-header>
    <ion-navbar>
       <ion-title>
-         Moderators Feeds :- 
+         Feeds to check :- 
       </ion-title>
       
    </ion-navbar>
@@ -11,15 +11,15 @@
 
    <ion-list>
       <ion-card
-         class="movie"
+         class="userFeeds"
          text-wrap
-         *ngFor="let movie of movies | async">
+         *ngFor="let userFeeds of userFeed | async">
          <ion-item>
-            <div *ngIf="movie.image">
-               <img [src]="movie.image">
+            <div *ngIf="userFeeds.feed">
+               <img [src]="userFeeds.feed">
             </div>
             
-            <p>{{ movie.summary }}</p>
+            <p>{{ userFeeds.summary }}</p>
 
          </ion-item>
 
@@ -29,13 +29,21 @@
               ion-button
               text-center
               color="primary"
-              (click)="editMovie(movie)">Accept</button>
+              (click)="ApproveFeeds(userFeed)">Accept
+            </button>
+            
+            <!-- <button
+              ion-button
+              text-center
+              color="secondary"
+              (click)="getAddress()">location
+            </button> -->
 
            <button
               ion-button
               text-center
               color="danger"
-              (click)="deleteMovie(movie.image)">Decline</button>
+              (click)="DeleteFeeds(userFeeds.feed)">Decline</button>
        </div>
 
       </ion-card>

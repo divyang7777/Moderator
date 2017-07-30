@@ -1,7 +1,7 @@
 <ion-header>
    <ion-navbar>
       <ion-title>
-         Moveez
+         Happiness Story
       </ion-title>
       <ion-buttons end>
        <button
@@ -18,19 +18,18 @@
 
    <ion-list>
       <ion-card
-         class="movie"
+         class="story"
          text-wrap
-         *ngFor="let movie of movies | async">
+         *ngFor="let story of stories | async">
          <ion-item>
-            <div *ngIf="movie.image">
-               <img [src]="movie.image">
+             <h2>{{story.title}}</h2>
+            <div *ngIf="story.image">
+               <img [src]="story.image">
             </div>
-            <h2>{{ movie.title }}</h2>
-            <p>{{ movie.summary }}</p>
+            <p>{{ story.summary }}</p>
 
          </ion-item>
       </ion-card>
    </ion-list>
-
 
 </ion-content>

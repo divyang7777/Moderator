@@ -15,41 +15,25 @@ import { Observable } from "rxjs/Observable";
 })
 export class HomePage {
 
-  private auth: any;
-  public movies: any;
-  private email: string = 'YOUR-EMAIL-ADDRESS';
-  private pass: string = 'PASSWORD-FOR-YOUR-EMAIL-ADDRESS';
-
+  public stories: any;
 
   constructor(public navCtrl: NavController,
-    private platform: Platform,
     private modalCtrl: ModalController,
-    private _IMG: Image,
-    private _LOADER: Preloader,
     private _DB: Database) {
   }
 
 
 
   ionViewDidEnter() {
-    // this._LOADER.displayPreloader();
-    this.platform.ready()
-      .then(() => {
-        this.loadAndParseMovies();
-      });
+      this.stories = this._DB.renderStory();
   }
 
-  loadAndParseMovies() {
-    this.movies = this._DB.renderMovies();
-    // this._LOADER.hidePreloader();
-  }
 
   addRecord() {
     let modal = this.modalCtrl.create('Modals');
     modal.onDidDismiss((data) => {
       if (data) {
-        // this._LOADER.displayPreloader();
-        this.loadAndParseMovies();
+        this.stories = this._DB.renderStory();
       }
     });
     modal.present();

@@ -9,27 +9,54 @@ import { HomePage } from "../../pages/home/home";
 
 @Injectable()
 export class Database {
-  loadAndParseMovies: any;
 
   constructor(public http: Http) {
   }
 
 
 
-  renderMovies(): Observable<any> {
+  renderFeeds(): Observable<any> {
     try {
       return new Observable(observer => {
-        let films: any = [];
-        // firebase.database().ref('films').remove(
-        firebase.database().ref('films').orderByKey().once('value', (items: any) => {
-          observer.next(films);
+        let feed: any = [];
+        firebase.database().ref('publicFeeds').orderByKey().once('value', (items: any) => {
+          observer.next(feed);
           observer.complete();
 
           items.forEach((item) => {
-            films.push(item.val());
+            feed.push(item.val());
           });
 
-          observer.next(films.item);
+          observer.next(feed.item);
+          observer.complete();
+        },
+          (error) => {
+            console.log("Observer error: ", error);
+            console.dir(error);
+            observer.error(error)
+          });
+
+      });
+    }
+    catch (error) {
+      console.log('Observable for retrieving films fails');
+      console.dir(error);
+    }
+  }
+
+  renderStory(): Observable<any> {
+    try {
+      return new Observable(observer => {
+        let feed: any = [];
+        firebase.database().ref('Moderator_Story').orderByKey().once('value', (items: any) => {
+          observer.next(feed);
+          observer.complete();
+
+          items.forEach((item) => {
+            feed.push(item.val());
+          });
+
+          observer.next(feed.item);
           observer.complete();
         },
           (error) => {
@@ -50,16 +77,16 @@ export class Database {
   renderModerator(): Observable<any> {
     try {
       return new Observable(observer => {
-        let moderator: any = [];
-        firebase.database().ref('moderator/').orderByKey().once('value', (items: any) => {
-          observer.next(moderator);
+        let feed: any = [];
+        firebase.database().ref('moderator').orderByKey().once('value', (items: any) => {
+          observer.next(feed);
           observer.complete();
 
           items.forEach((item) => {
-            moderator.push(item.val());
+            feed.push(item.val());
           });
 
-          observer.next(moderator.item);
+          observer.next(feed.item);
           observer.complete();
         },
           (error) => {
@@ -76,12 +103,28 @@ export class Database {
     }
   }
 
+  // addUserfeed(userFeeds)
+  // {
+  //   return new Promise((resolve) =>
+  // {
+  //     let ref:any;
+
+  //     ref = firebase.database().ref('userProfile/').orderByKey()
+  //     .orderByChild('userFeed/').equalTo('uid');
+  //     ref.push(userFeeds)
+
+  //     resolve(true);
+  //   });
+    
+  // }
+
+
 
 
   deleteMovie(id: any): Promise<any> {
     return new Promise((resolve) => {
       var ref = firebase.database().ref('moderator');
-      ref.orderByChild('image').equalTo(id).on('child_added', (snapshot) => {
+      ref.orderByChild('feed').equalTo(id).on('child_added', (snapshot) => {
         snapshot.ref.remove()
       });
       // console.log(id);
@@ -95,10 +138,9 @@ export class Database {
   }
 
 
-
   addToDatabase(movieObj): Promise<any> {
     return new Promise((resolve) => {
-      let addRef = firebase.database().ref('moderator');
+      let addRef = firebase.database().ref('Moderator_Story');
       addRef.push(movieObj);
       resolve(true);
     });
@@ -108,7 +150,7 @@ export class Database {
 
   updateDatabase(id, moviesObj): Promise<any> {
     return new Promise((resolve) => {
-      var updateRef = firebase.database().ref('moderator').child(id);
+      var updateRef = firebase.database().ref('Moderator_Story').child(id);
       updateRef.update(moviesObj);
       resolve(true);
     });
@@ -122,7 +164,7 @@ export class Database {
       parseUpload: any;
 
     return new Promise((resolve, reject) => {
-      storageRef = firebase.storage().ref('posters/' + image);
+      storageRef = firebase.storage().ref('Image/' + image);
       parseUpload = storageRef.putString(imageString, 'data_url');
 
       parseUpload.on('state_changed', (_snapshot) => {
